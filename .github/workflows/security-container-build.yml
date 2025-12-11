@@ -1,7 +1,9 @@
 name: Auto-Injected Security Scan
 on:
-  pull_request: # Triggered by the PR event, not by a user call
-  merge_group:
+  push:
+    branches: [ main, master ]
+  pull_request:
+    branches: [ main, master ]
 
 jobs:
   policy-scan:

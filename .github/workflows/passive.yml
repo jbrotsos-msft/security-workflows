@@ -4,6 +4,10 @@ on:
     workflows: ["Build and Deploy"] # Name of the dev's workflow
     types:
       - completed
+  push:
+    branches: [ main, master ]
+  pull_request:
+    branches: [ main, master ]
 
 jobs:
   scan:

@@ -1,0 +1,22 @@
+name: Passive Security Scan
+on:
+  workflow_run:
+    workflows: ["Build and Deploy"] # Name of the dev's workflow
+    types:
+      - completed
+
+jobs:
+  scan:
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
+    runs-on: ubuntu-latest
+    steps:
+
+      # Again, relies on convention or analyzing the logs/artifacts of the previous run
+      - name: Download Defender CLI
+        run: |
+         curl -L -o defender "https://aka.ms/defender-cli_linux-x64" && chmod +x defender
+  
+      - name: Run Defender CLI Scan (Built)
+        run: |
+          ./defender scan image 'vuln/testdocker:latest' 
+        continue-on-error: true

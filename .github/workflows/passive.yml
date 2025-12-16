@@ -9,6 +9,9 @@ on:
   pull_request:
     branches: [ main, master ]
 
+permissions:
+  id-token: write
+
 jobs:
   scan:
     if: ${{ github.event.workflow_run.conclusion == 'success' }}
